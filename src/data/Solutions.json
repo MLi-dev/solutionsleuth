@@ -1,0 +1,125 @@
+{
+	"problem": "job",
+	"solutions": [
+		{
+			"id": 1,
+			"criteria": {
+				"job_type": "Full-time",
+				"industry": "Technology",
+				"location": "Remote",
+				"experience": "Beginner",
+				"salary": "6"
+			},
+			"solution": {
+				"title": "Entry-Level Software Engineer - Remote",
+				"description": "Since you're looking for a full-time technology job as a beginner, consider applying for remote junior software engineering roles. Companies like Google, Microsoft, and startups offer remote entry-level positions.",
+				"actions": [
+					"Build a strong portfolio with GitHub projects",
+					"Improve your coding skills via LeetCode or CodeSignal",
+					"Check out job boards like LinkedIn, Glassdoor, and Wellfound (formerly AngelList)"
+				],
+				"links": [
+					"https://www.linkedin.com/jobs/",
+					"https://www.indeed.com/",
+					"https://github.com/"
+				]
+			}
+		},
+		{
+			"id": 2,
+			"criteria": {
+				"job_type": "Freelance",
+				"industry": "Finance",
+				"location": "Remote",
+				"experience": "Intermediate",
+				"salary": "60000-80000"
+			},
+			"solution": {
+				"title": "Freelance Financial Consultant",
+				"description": "As an experienced finance professional, freelancing can be a great option. You can provide financial planning, tax consulting, or investment advisory services remotely.",
+				"actions": [
+					"Join platforms like Upwork, Toptal, or Fiverr",
+					"Network on LinkedIn to find high-paying freelance clients",
+					"Build an online presence with a personal website and case studies"
+				],
+				"links": [
+					"https://www.upwork.com/",
+					"https://www.fiverr.com/",
+					"https://www.toptal.com/"
+				]
+			}
+		},
+		{
+			"id": 3,
+			"criteria": {
+				"job_type": "Internship",
+				"industry": "Healthcare",
+				"location": "On-site",
+				"experience": "Student",
+				"salary": "Unpaid or stipend"
+			},
+			"solution": {
+				"title": "Healthcare Internship - Clinical or Research",
+				"description": "Healthcare internships provide hands-on experience for students. You can work in hospitals, research institutions, or biotech companies.",
+				"actions": [
+					"Look for hospital internship programs",
+					"Join university research projects",
+					"Network with professionals through industry events"
+				],
+				"links": [
+					"https://www.indeed.com/q-Healthcare-Internship-jobs.html",
+					"https://www.glassdoor.com/",
+					"https://www.linkedin.com/"
+				]
+			}
+		},
+		{
+			"id": 4,
+			"criteria": {
+				"job_type": "Part-time",
+				"industry": "Retail",
+				"location": "Hybrid",
+				"experience": "Entry-level",
+				"salary": "<30000"
+			},
+			"solution": {
+				"title": "Retail Sales Associate - Part-Time",
+				"description": "If you're looking for a hybrid part-time role in retail, you can consider positions in e-commerce customer service or in-store sales.",
+				"actions": [
+					"Apply to companies like Amazon, Walmart, or Target",
+					"Consider hybrid roles like online customer service",
+					"Work on communication and sales skills"
+				],
+				"links": [
+					"https://www.indeed.com/",
+					"https://www.walmart.com/",
+					"https://www.target.com/"
+				]
+			}
+		},
+		{
+			"id": 5,
+			"criteria": {
+				"job_type": "Full-time",
+				"industry": "Education",
+				"location": "On-site",
+				"experience": "Experienced",
+				"salary": ">80000"
+			},
+			"solution": {
+				"title": "Senior Education Consultant / University Lecturer",
+				"description": "With experience in education, you can pursue a role as a senior consultant or professor. Many universities and EdTech companies hire experienced educators.",
+				"actions": [
+					"Apply for lecturer positions at universities",
+					"Explore consulting roles in EdTech companies",
+					"Publish research papers to build authority"
+				],
+				"links": [
+					"https://www.higheredjobs.com/",
+					"https://www.linkedin.com/",
+					"https://www.edtechjobs.com/"
+				]
+			}
+		}
+	]
+}

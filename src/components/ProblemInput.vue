@@ -1,11 +1,16 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
 import followUpData from "../data/followUpQuestions.json";
+import solutionResponse from "../data/solutions.json";
 
 const problemDescription = ref("");
 const questions = reactive([]);
 const answeredQuestions = reactive([]);
-
+const allQuestionsAnswered = ref(false);
+const willRecommend = ref(false);
+const ansObj = ref({});
+const recommendedPosts = reactive([]);
+const matchSolution = reactive({});
 const submitProblem = () => {
   console.log("Problem submitted:", problemDescription.value);
 
@@ -23,7 +28,18 @@ const editProblem = (questionId) => {
   const questionObj = questions.find((q) => q.id === questionId);
   if (questionObj) {
     questionObj.hidden = false;
+    allQuestionsAnswered.value = false;
   }
+};
+const generateSolution = () => {
+  const criteria = buildCriteriaFromAnswers();
+  matchSolution.problem = findMatchingSolution(criteria)?.problem;
+  matchSolution.value = findMatchingSolution(criteria)?.solution;
+  console.log("Matching solution:", matchSolution.value);
+  for (let [key, value] of Object.entries(matchSolution.value)) {
+    console.log(`${key}: ${value}`);
+  }
+  willRecommend.value = true;
 };
 const updateAnswer = (questionId, answer) => {
   const questionObj = questions.find((q) => q.id === questionId);
@@ -37,10 +53,46 @@ const updateAnswer = (questionId, answer) => {
       answeredQuestions.push({
         id: questionId,
         question: questionObj.question,
-        answer,
+        answer: answer,
       });
     }
   }
+  if (questions.every((q) => q.answer)) {
+    allQuestionsAnswered.value = true;
+  }
+};
+// Mapping of question IDs to ansObj keys
+const questionKeyMap = {
+  1: "job_type",
+  2: "industry",
+  3: "location",
+  4: "experience",
+  5: "salary",
+};
+
+// Function to build criteria object from answeredQuestions
+const buildCriteriaFromAnswers = () => {
+  const criteria = {};
+  answeredQuestions.forEach((answer) => {
+    const key = questionKeyMap[answer.id];
+    if (key) {
+      criteria[key] = answer.answer;
+    }
+  });
+  return criteria;
+};
+
+// Function to find the matching solution based on criteria
+const findMatchingSolution = (criteria) => {
+  return solutionResponse?.solutions.find((s) => {
+    return (
+      s.criteria.job_type === criteria.job_type &&
+      s.criteria.industry === criteria.industry &&
+      s.criteria.location === criteria.location &&
+      s.criteria.experience === criteria.experience &&
+      s.criteria.salary === criteria.salary
+    );
+  });
 };
 </script>
 
@@ -120,5 +172,27 @@ const updateAnswer = (questionId, answer) => {
         </li>
       </ul>
     </div>
+  </div>
+  <div
+    v-if="allQuestionsAnswered === true"
+    class="mt-4 border rounded shadow-md p-4"
+  >
+    <button @click="generateSolution">Give Recommendations</button>
+  </div>
+  <div class="mt-4 border rounded shadow-md p-4">
+    <h3 class="text-md font-semibold">
+      Here is a solution for {{ problemDescription }}
+    </h3>
+    <table class="table-auto w-full">
+      <tbody v-if="matchSolution.value">
+        <tr
+          v-for="[key, value] in Object.entries(matchSolution.value)"
+          :key="key"
+        >
+          <td class="border px-4 py-2">{{ key }}</td>
+          <td class="border px-4 py-2">{{ value }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
