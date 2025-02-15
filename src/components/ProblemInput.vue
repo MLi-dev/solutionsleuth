@@ -2,12 +2,15 @@
 import { ref, reactive, onMounted } from "vue";
 import followUpData from "../data/followUpQuestions.json";
 import solutionResponse from "../data/solutions.json";
+import ProblemForm from "./ProblemForm.vue";
+import FollowUpQuestions from "./FollowUpQuestions.vue";
+import AnsweredQuestions from "./AnsweredQuestions.vue";
+import GiveSolutions from "./GiveSolutions.vue";
 
 const problemDescription = ref("");
 const questions = reactive([]);
 const answeredQuestions = reactive([]);
 const allQuestionsAnswered = ref(false);
-const willRecommend = ref(false);
 const ansObj = ref({});
 const recommendedPosts = reactive([]);
 const matchSolution = reactive({});
@@ -39,9 +42,8 @@ const generateSolution = () => {
   for (let [key, value] of Object.entries(matchSolution.value)) {
     console.log(`${key}: ${value}`);
   }
-  willRecommend.value = true;
 };
-const updateAnswer = (questionId, answer) => {
+const updateAnswer = ({ questionId, answer }) => {
   const questionObj = questions.find((q) => q.id === questionId);
   if (questionObj) {
     const existingAnswer = answeredQuestions.find((a) => a.id === questionId);
@@ -98,80 +100,17 @@ const findMatchingSolution = (criteria) => {
 
 <template>
   <div>
-    <h2 class="text-lg font-semibold">How can I help?</h2>
-    <input
-      v-model="problemDescription"
-      type="text"
-      class="border p-2 w-full mt-2 rounded"
-      placeholder="Enter your problem..."
+    <ProblemForm
+      v-model:problemDescription="problemDescription"
+      @submitProblem="submitProblem"
     />
-    <button @click="submitProblem">Submit</button>
   </div>
   <div class="flex">
-    <div
-      v-if="questions.length"
-      class="mt-4 w-1/2 border rounded shadow-md mr-4"
-    >
-      <h3 class="text-md font-semibold">Follow-up Questions:</h3>
-      <ul>
-        <li
-          v-for="q in questions"
-          :key="q.id"
-          :class="{
-            hidden: q.hidden,
-          }"
-          class="mt-2 p-2 border-b"
-        >
-          <p class="font-semibold">{{ q.question }}</p>
-
-          <div v-if="q.type === 'text'">
-            <button
-              v-for="option in q.options"
-              :key="option"
-              @click="updateAnswer(q.id, option)"
-              :class="{
-                'bg-green-200': option === q.answer,
-                'bg-gray-200': option !== q.answer,
-              }"
-              class="px-4 py-2 m-1 rounded cursor-pointer"
-            >
-              {{ option }}
-            </button>
-          </div>
-
-          <input
-            v-else-if="q.type === 'text-box'"
-            type="text"
-            class="border p-2 w-full"
-            @input="updateAnswer(q.id, $event.target.value)"
-          />
-
-          <input
-            v-else-if="q.type === 'number'"
-            type="number"
-            class="border p-2 w-full"
-            @input="updateAnswer(q.id, $event.target.value)"
-          />
-        </li>
-      </ul>
-    </div>
-    <div
-      v-if="answeredQuestions.length"
-      class="mt-4 w-1/2 border rounded shadow-md"
-    >
-      <h3 class="text-md font-semibold">Answered Questions:</h3>
-      <ul>
-        <li
-          v-for="answer in answeredQuestions"
-          :key="answer.id"
-          class="mt-2 p-2 border-b"
-        >
-          <p class="font-semibold">Question: {{ answer.question }}</p>
-          <p>Answer: {{ answer.answer }}</p>
-          <button @click="editProblem(answer.id)">Edit Answer</button>
-        </li>
-      </ul>
-    </div>
+    <FollowUpQuestions :questions="questions" @updateAnswer="updateAnswer" />
+    <AnsweredQuestions
+      :answeredQuestions="answeredQuestions"
+      @editProblem="editProblem"
+    />
   </div>
   <div
     v-if="allQuestionsAnswered === true"
@@ -179,20 +118,8 @@ const findMatchingSolution = (criteria) => {
   >
     <button @click="generateSolution">Give Recommendations</button>
   </div>
-  <div class="mt-4 border rounded shadow-md p-4">
-    <h3 class="text-md font-semibold">
-      Here is a solution for {{ problemDescription }}
-    </h3>
-    <table class="table-auto w-full">
-      <tbody v-if="matchSolution.value">
-        <tr
-          v-for="[key, value] in Object.entries(matchSolution.value)"
-          :key="key"
-        >
-          <td class="border px-4 py-2">{{ key }}</td>
-          <td class="border px-4 py-2">{{ value }}</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <GiveSolutions
+    :problemDescription="problemDescription"
+    :matchSolution="matchSolution"
+  />
 </template>
