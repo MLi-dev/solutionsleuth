@@ -1,5 +1,11 @@
 import { createApp } from "vue";
 import App from "./App.vue";
-import "./assets/App.css";
+import "./main.css";
+// Export the component as a library
+export default App;
 
-createApp(App).mount("#app");
+// Optionally, you can also provide a way to mount the widget to a specific element
+window.renderMyWidget = function (elementId) {
+	const app = createApp(App);
+	app.mount(`#${elementId}`);
+};

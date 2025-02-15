@@ -2,10 +2,11 @@
 import { ref, reactive, onMounted } from "vue";
 import followUpData from "../data/followUpQuestions.json";
 import solutionResponse from "../data/solutions.json";
-import ProblemForm from "./ProblemForm.vue";
-import FollowUpQuestions from "./FollowUpQuestions.vue";
-import AnsweredQuestions from "./AnsweredQuestions.vue";
-import GiveSolutions from "./GiveSolutions.vue";
+import ProblemForm from "../components/ProblemForm.vue";
+import FollowUpQuestions from "../components/FollowUpQuestions.vue";
+import AnsweredQuestions from "../components/AnsweredQuestions.vue";
+import GiveSolutions from "../components/GiveSolutions.vue";
+import StarRating from "../components/StarRating.vue";
 
 const problemDescription = ref("");
 const questions = reactive([]);
@@ -14,6 +15,7 @@ const allQuestionsAnswered = ref(false);
 const ansObj = ref({});
 const recommendedPosts = reactive([]);
 const matchSolution = reactive({});
+const rating = ref(0);
 const submitProblem = () => {
   console.log("Problem submitted:", problemDescription.value);
 
@@ -96,6 +98,10 @@ const findMatchingSolution = (criteria) => {
     );
   });
 };
+const handleRating = (newRating) => {
+  rating.value = newRating;
+  console.log("User rating:", newRating);
+};
 </script>
 
 <template>
@@ -118,8 +124,11 @@ const findMatchingSolution = (criteria) => {
   >
     <button @click="generateSolution">Give Recommendations</button>
   </div>
-  <GiveSolutions
-    :problemDescription="problemDescription"
-    :matchSolution="matchSolution"
-  />
+  <div v-if="matchSolution.value">
+    <GiveSolutions
+      :problemDescription="problemDescription"
+      :matchSolution="matchSolution"
+    />
+    <StarRating :rating="rating" @updateRating="handleRating" />
+  </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import ProblemInput from "./components/ProblemInput.vue";
+import ProblemInput from "./pages/Chat.vue";
 </script>
 
 <template>
