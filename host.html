@@ -6,13 +6,21 @@
 		<script src="./dist/chat-widget.iife.js"></script>
 	</head>
 	<body>
-		<h1>Widget Host Page</h1>
 		<div id="chat-container"></div>
 		<script>
-			// Assuming the library name is MyWidget
-			   window.renderMyWidget(
-			     'chat-container'
-			     )
+				// Assuming the library name is MyWidget
+				function getUrlParameter(name) {
+			    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+			    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+			    const results = regex.exec(location.search);
+			    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+			  }
+			const role = getUrlParameter('role') || 'user';
+				   window.renderMyWidget(
+				     'chat-container', {
+							role: role,
+						 }
+				     )
 		</script>
 	</body>
 </html>

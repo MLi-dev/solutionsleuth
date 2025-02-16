@@ -1,0 +1,40 @@
+{
+	"themes": [
+		{
+			"name": "Dark Theme",
+			"backgroundColor": "#000000",
+			"textColor": "#FFFFFF",
+			"fontFamily": "font-sans"
+		},
+		{
+			"name": "Light Theme",
+			"backgroundColor": "#FFFFFF",
+			"textColor": "#000000",
+			"fontFamily": "font-serif"
+		},
+		{
+			"name": "Blue Theme",
+			"backgroundColor": "#1E3A8A",
+			"textColor": "#FFFFFF",
+			"fontFamily": "font-mono"
+		},
+		{
+			"name": "Green Theme",
+			"backgroundColor": "#10B981",
+			"textColor": "#FFFFFF",
+			"fontFamily": "font-sans"
+		},
+		{
+			"name": "Red Theme",
+			"backgroundColor": "#EF4444",
+			"textColor": "#FFFFFF",
+			"fontFamily": "font-serif"
+		},
+		{
+			"name": "Purple Theme",
+			"backgroundColor": "#6B21A8",
+			"textColor": "#FFFFFF",
+			"fontFamily": "font-mono"
+		}
+	]
+}

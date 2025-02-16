@@ -5,7 +5,7 @@ import "./main.css";
 export default App;
 
 // Optionally, you can also provide a way to mount the widget to a specific element
-window.renderMyWidget = function (elementId) {
-	const app = createApp(App);
+window.renderMyWidget = function (elementId, props) {
+	const app = createApp(App, props);
 	app.mount(`#${elementId}`);
 };

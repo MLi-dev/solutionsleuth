@@ -19,6 +19,14 @@ const matchSolution = reactive({});
 const rating = ref(0);
 const initialIndex = ref(0);
 const showSingleQuestion = ref(true);
+
+const props = defineProps({
+  logo: {
+    type: String,
+    required: true,
+  },
+});
+
 const submitProblem = () => {
   console.log("Problem submitted:", problemDescription.value);
 
@@ -111,18 +119,28 @@ const handleRating = (newRating) => {
 
 <template>
   <div>
+    <img :src="props.logo" alt="Logo" class="w-16 h-16 m-4" />
     <ProblemForm
       v-model:problemDescription="problemDescription"
       @submitProblem="submitProblem"
     />
   </div>
   <div class="flex justify-end mb-4">
-    <button
-      @click="showSingleQuestion = !showSingleQuestion"
-      class="px-4 py-2 bg-blue-500 text-white rounded"
-    >
-      Toggle Questions View
-    </button>
+    <label for="toggleQuestionsView" class="flex items-center cursor-pointer">
+      <div class="relative">
+        <input
+          id="toggleQuestionsView"
+          type="checkbox"
+          v-model="showSingleQuestion"
+          class="sr-only"
+        />
+        <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+        <div
+          class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"
+        ></div>
+      </div>
+      <div class="ml-3 text-gray-700 font-medium">Toggle Questions View</div>
+    </label>
   </div>
   <div class="flex">
     <FollowUpQuestions
@@ -155,3 +173,14 @@ const handleRating = (newRating) => {
     <StarRating :rating="rating" @updateRating="handleRating" />
   </div>
 </template>
+
+<style scoped>
+/* Toggle Slider Styles */
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #ffffff; /* Change the color of the dot when checked */
+}
+input:checked ~ .block {
+  background-color: #04590e; /* Change the background color when checked */
+}
+</style>

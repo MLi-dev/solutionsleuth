@@ -1,24 +1,37 @@
 <script setup>
-import ProblemInput from "./pages/Chat.vue";
+import { ref, onMounted } from "vue";
+import ChatWidget from "./pages/Chat.vue";
+import AdminWidget from "./pages/Admin.vue";
+
+const props = defineProps({
+  role: {
+    type: String,
+    required: true,
+  },
+});
+
+const backgroundColor = ref("");
+const fontColor = ref("");
+const fontFamily = ref("");
+const logo = ref("");
+
+onMounted(() => {
+  backgroundColor.value = localStorage.getItem("backgroundColor") || "#ffffff"; // Default to white if not set
+  fontColor.value = localStorage.getItem("fontColor") || "#000000"; // Default to black if not set
+  fontFamily.value = localStorage.getItem("fontFamily") || "font-sans"; // Default to sans-serif if not set
+  logo.value =
+    localStorage.getItem("logo") ||
+    "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"; // Default to Google logo if not set
+  console.log("Role:", props.role);
+});
 </script>
 
 <template>
-  <div>
-    <ProblemInput />
+  <div
+    :class="[fontFamily]"
+    :style="{ backgroundColor: backgroundColor, color: fontColor }"
+  >
+    <AdminWidget v-if="props.role === 'admin'" />
+    <ChatWidget v-else :logo="logo" />
   </div>
 </template>
-
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
