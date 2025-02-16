@@ -32,6 +32,24 @@
         class="border p-2 w-full"
         @input="updateAnswer(currentQuestion.id, $event.target.value)"
       />
+      <div
+        v-else-if="currentQuestion.type === 'image-multi'"
+        class="flex space-x-2"
+      >
+        <img
+          v-for="option in currentQuestion.options"
+          :key="option"
+          :src="option"
+          @click="updateAnswer(currentQuestion.id, option)"
+          :class="{
+            'border-4 border-green-500':
+              currentQuestion.answer.includes(option),
+            'border-2 border-gray-300':
+              !currentQuestion.answer.includes(option),
+          }"
+          class="w-16 h-16 cursor-pointer"
+        />
+      </div>
     </div>
 
     <div class="flex justify-between mt-4">

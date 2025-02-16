@@ -118,6 +118,9 @@ const handleRating = (newRating) => {
   rating.value = newRating;
   console.log("User rating:", newRating);
 };
+const refreshPage = () => {
+  location.reload();
+};
 </script>
 
 <template>
@@ -179,6 +182,12 @@ const handleRating = (newRating) => {
       :matchSolution="matchSolution"
     />
     <StarRating :rating="rating" @updateRating="handleRating" />
+    <button
+      @click="refreshPage"
+      class="px-4 py-2 bg-blue-500 text-white rounded shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+    >
+      Refresh Page
+    </button>
   </div>
 </template>
 
