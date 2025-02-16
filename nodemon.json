@@ -1,0 +1,5 @@
+{
+	"watch": ["src", "tailwind.config.js", "postcss.config.js"],
+	"ext": "js,vue,css,json",
+	"exec": "npm run build"
+}

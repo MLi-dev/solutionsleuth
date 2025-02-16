@@ -2,14 +2,14 @@
 	"problem": "job",
 	"questions": [
 		{
-			"id": 1,
+			"id": 0,
 			"type": "text",
 			"question": "What type of job are you looking for?",
 			"options": ["Full-time", "Part-time", "Internship", "Freelance"],
 			"answer": ""
 		},
 		{
-			"id": 2,
+			"id": 1,
 			"type": "text",
 			"question": "Which industry are you interested in?",
 			"options": [
@@ -23,14 +23,14 @@
 			"answer": ""
 		},
 		{
-			"id": 3,
+			"id": 2,
 			"type": "text",
 			"question": "Do you have a preferred job location?",
 			"options": ["Remote", "On-site", "Hybrid", "No preference"],
 			"answer": ""
 		},
 		{
-			"id": 4,
+			"id": 3,
 			"type": "text",
 			"question": "What is your level of experience in this field?",
 			"options": [
@@ -43,7 +43,7 @@
 			"answer": ""
 		},
 		{
-			"id": 5,
+			"id": 4,
 			"type": "text-box",
 			"question": "What is your expected salary range (in USD)?",
 			"answer": ""

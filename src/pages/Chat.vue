@@ -7,6 +7,7 @@ import FollowUpQuestions from "../components/FollowUpQuestions.vue";
 import AnsweredQuestions from "../components/AnsweredQuestions.vue";
 import GiveSolutions from "../components/GiveSolutions.vue";
 import StarRating from "../components/StarRating.vue";
+import SingleQuestion from "../components/SingleQuestion.vue";
 
 const problemDescription = ref("");
 const questions = reactive([]);
@@ -16,6 +17,8 @@ const ansObj = ref({});
 const recommendedPosts = reactive([]);
 const matchSolution = reactive({});
 const rating = ref(0);
+const initialIndex = ref(0);
+const showSingleQuestion = ref(true);
 const submitProblem = () => {
   console.log("Problem submitted:", problemDescription.value);
 
@@ -30,6 +33,8 @@ const submitProblem = () => {
   }
 };
 const editProblem = (questionId) => {
+  initialIndex.value = questionId;
+  console.log("Index value now: ", initialIndex.value);
   const questionObj = questions.find((q) => q.id === questionId);
   if (questionObj) {
     questionObj.hidden = false;
@@ -67,11 +72,11 @@ const updateAnswer = ({ questionId, answer }) => {
 };
 // Mapping of question IDs to ansObj keys
 const questionKeyMap = {
-  1: "job_type",
-  2: "industry",
-  3: "location",
-  4: "experience",
-  5: "salary",
+  0: "job_type",
+  1: "industry",
+  2: "location",
+  3: "experience",
+  4: "salary",
 };
 
 // Function to build criteria object from answeredQuestions
@@ -111,8 +116,26 @@ const handleRating = (newRating) => {
       @submitProblem="submitProblem"
     />
   </div>
+  <div class="flex justify-end mb-4">
+    <button
+      @click="showSingleQuestion = !showSingleQuestion"
+      class="px-4 py-2 bg-blue-500 text-white rounded"
+    >
+      Toggle Questions View
+    </button>
+  </div>
   <div class="flex">
-    <FollowUpQuestions :questions="questions" @updateAnswer="updateAnswer" />
+    <FollowUpQuestions
+      v-if="!showSingleQuestion"
+      :questions="questions"
+      @updateAnswer="updateAnswer"
+    />
+    <SingleQuestion
+      v-if="showSingleQuestion"
+      :questions="questions"
+      :initialIndex="initialIndex"
+      @updateAnswer="updateAnswer"
+    />
     <AnsweredQuestions
       :answeredQuestions="answeredQuestions"
       @editProblem="editProblem"

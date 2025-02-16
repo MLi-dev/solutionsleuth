@@ -2,7 +2,7 @@
 	"problem": "job",
 	"solutions": [
 		{
-			"id": 1,
+			"id": 0,
 			"criteria": {
 				"job_type": "Full-time",
 				"industry": "Technology",
@@ -26,7 +26,7 @@
 			}
 		},
 		{
-			"id": 2,
+			"id": 1,
 			"criteria": {
 				"job_type": "Freelance",
 				"industry": "Finance",
@@ -50,7 +50,7 @@
 			}
 		},
 		{
-			"id": 3,
+			"id": 2,
 			"criteria": {
 				"job_type": "Internship",
 				"industry": "Healthcare",
@@ -74,7 +74,7 @@
 			}
 		},
 		{
-			"id": 4,
+			"id": 3,
 			"criteria": {
 				"job_type": "Part-time",
 				"industry": "Retail",
@@ -98,7 +98,7 @@
 			}
 		},
 		{
-			"id": 5,
+			"id": 4,
 			"criteria": {
 				"job_type": "Full-time",
 				"industry": "Education",
