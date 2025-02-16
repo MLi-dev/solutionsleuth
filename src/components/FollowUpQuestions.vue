@@ -34,17 +34,23 @@
           @input="updateAnswer(q.id, $event.target.value)"
         />
 
-        <input
-          v-else-if="q.type === 'number'"
-          type="number"
-          class="border p-2 w-full"
-          @input="updateAnswer(q.id, $event.target.value)"
-        />
+        <div v-else-if="q.type === 'image-multi'" class="flex space-x-2">
+          <img
+            v-for="option in q.options"
+            :key="option"
+            :src="option"
+            @click="updateAnswer(q.id, option)"
+            :class="{
+              'border-4 border-green-500': q.answer.includes(option),
+              'border-2 border-gray-300': !q.answer.includes(option),
+            }"
+            class="w-16 h-16 cursor-pointer"
+          />
+        </div>
       </li>
     </ul>
   </div>
-</template> 
-
+</template>
 
 <script>
 export default {
@@ -62,6 +68,3 @@ export default {
   },
 };
 </script>
- 
- 
- 

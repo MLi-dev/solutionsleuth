@@ -60,6 +60,7 @@ const generateSolution = () => {
 };
 const updateAnswer = ({ questionId, answer }) => {
   const questionObj = questions.find((q) => q.id === questionId);
+  console.log("Updated questionobject: ", questionObj);
   if (questionObj) {
     const existingAnswer = answeredQuestions.find((a) => a.id === questionId);
     questionObj.answer = answer;
@@ -67,11 +68,13 @@ const updateAnswer = ({ questionId, answer }) => {
     if (existingAnswer) {
       existingAnswer.answer = answer;
     } else {
+      console.log("Answer: ", answer);
       answeredQuestions.push({
         id: questionId,
         question: questionObj.question,
         answer: answer,
       });
+      console.log("Answered Questions: ", answeredQuestions);
     }
   }
   if (questions.every((q) => q.answer)) {
@@ -161,9 +164,14 @@ const handleRating = (newRating) => {
   </div>
   <div
     v-if="allQuestionsAnswered === true"
-    class="mt-4 border rounded shadow-md p-4"
+    class="mt-4 border rounded shadow-md p-6 bg-white"
   >
-    <button @click="generateSolution">Give Recommendations</button>
+    <button
+      @click="generateSolution"
+      class="px-4 py-2 bg-blue-500 text-white rounded shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+    >
+      Give Recommendations
+    </button>
   </div>
   <div v-if="matchSolution.value">
     <GiveSolutions

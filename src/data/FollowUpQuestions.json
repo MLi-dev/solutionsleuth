@@ -47,6 +47,18 @@
 			"type": "text-box",
 			"question": "What is your expected salary range (in USD)?",
 			"answer": ""
+		},
+		{
+			"id": 5,
+			"type": "image-multi",
+			"question": "Which company do you like?",
+			"options": [
+				"https://www.pngfind.com/pngs/m/665-6650340_valve-corporation-logo-valve-corporation-logo-png-transparent.png",
+				"https://cdn.freebiesupply.com/images/large/2x/apple-logo-transparent.png",
+				"https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Microsoft_logo.svg/480px-Microsoft_logo.svg.png",
+				"https://e7.pngegg.com/pngimages/152/175/png-clipart-logo-brand-blizzard-entertainment-font-product-battle-net-blue-text.png"
+			],
+			"answer": ""
 		}
 	]
 }
